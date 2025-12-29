@@ -1859,8 +1859,10 @@ const formatCurrency = (value: number) => {
               </div>
             </div>
 
+            <USeparator />
+
             <!-- AWS Aurora -->
-            <div>
+            <div class="pt-2">
               <h3 class="text-sm font-medium mb-4 text-muted">
                 AWS Aurora Postgres
               </h3>
@@ -1982,8 +1984,10 @@ const formatCurrency = (value: number) => {
               </div>
             </div>
 
+            <USeparator />
+
             <!-- Neon DB -->
-            <div>
+            <div class="pt-2">
               <h3 class="text-sm font-medium mb-4 text-muted">Neon DB</h3>
               <div class="space-y-4">
                 <UFormField label="Tier" name="neonTier">
@@ -2026,8 +2030,10 @@ const formatCurrency = (value: number) => {
               </div>
             </div>
 
+            <USeparator />
+
             <!-- PlanetScale -->
-            <div>
+            <div class="pt-2">
               <h3 class="text-sm font-medium mb-4 text-muted">PlanetScale</h3>
               <div class="space-y-4">
                 <UFormField label="Cluster Type" name="planetscaleCluster">
@@ -2062,8 +2068,10 @@ const formatCurrency = (value: number) => {
               </div>
             </div>
 
+            <USeparator />
+
             <!-- Digital Ocean -->
-            <div>
+            <div class="pt-2">
               <h3 class="text-sm font-medium mb-4 text-muted">
                 Digital Ocean PostgreSQL
               </h3>
