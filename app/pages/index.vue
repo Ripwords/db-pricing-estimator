@@ -1427,11 +1427,13 @@ const inputs = reactive<{
     | "generalPurpose"
     | "storageOptimized";
   digitalOceanAdditionalNodes: number;
+  serverlessHoursPerMonth: number; // Hours per month for serverless databases (accounts for downtime)
 }>({
   // Common inputs
   storageGB: 100,
   dataTransferGB: 50,
   vercelStaticIP: false,
+  serverlessHoursPerMonth: 720, // Default: 24 * 30 = 720 hours (24/7)
 
   // AWS Aurora
   auroraType: "serverless",
@@ -1584,8 +1586,11 @@ const auroraCost = computed(() => {
         : auroraPricing.serverless.standard;
 
     // ACU cost: billed per second, but we calculate per hour then multiply by hours in month
-    // Assuming average ACU capacity for the month
-    const acuCost = inputs.auroraServerlessACU * config.acuPerHour * 24 * 30;
+    // Using serverlessHoursPerMonth to account for downtime (defaults to 720 = 24/7)
+    const acuCost =
+      inputs.auroraServerlessACU *
+      config.acuPerHour *
+      inputs.serverlessHoursPerMonth;
     const storageCost = inputs.storageGB * config.storagePerGB;
     const ioCost = inputs.auroraIORequests * config.ioPerMillion;
     const backupCost = inputs.auroraBackupGB * auroraPricing.backupPerGB;
@@ -1644,7 +1649,8 @@ const neonCost = computed(() => {
   const tier = neonPricing.tiers[inputs.neonTier];
 
   // Compute cost: calculate total CU-hours for the month, subtract included if any
-  const totalCUHours = inputs.neonComputeUnits * 24 * 30;
+  // Using serverlessHoursPerMonth to account for downtime (defaults to 720 = 24/7)
+  const totalCUHours = inputs.neonComputeUnits * inputs.serverlessHoursPerMonth;
   const billableCUHours = Math.max(0, totalCUHours - tier.includedCUHours);
   const computeCost = billableCUHours * tier.computeUnitPerHour;
 
@@ -1854,6 +1860,23 @@ const formatCurrency = (value: number) => {
                   <template #hint>
                     $100/month + $0.15/GB for private data transfer (IP
                     allowlisting)
+                  </template>
+                </UFormField>
+
+                <UFormField
+                  label="Serverless Uptime (hours/month)"
+                  name="serverlessHours"
+                >
+                  <UInputNumber
+                    v-model="inputs.serverlessHoursPerMonth"
+                    :min="1"
+                    :max="744"
+                    :step="1"
+                  />
+                  <template #hint>
+                    Hours per month for serverless databases (Aurora Serverless,
+                    Neon DB). Default: 720 hours (24/7). Adjust to account for
+                    downtime or scale-to-zero periods.
                   </template>
                 </UFormField>
               </div>
