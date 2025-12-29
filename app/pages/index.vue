@@ -512,53 +512,885 @@ const planetscalePricing = reactive({
 
 // Digital Ocean PostgreSQL pricing - editable
 const digitalOceanPricing = reactive({
-  instances: [
-    {
-      name: "1-1-8",
-      ram: 1,
-      vCPU: 1,
-      pricePerHour: 0.02254,
-      pricePerMonth: 15.15,
-      storageMin: 10,
-      storageMax: 30,
+  cpuOptions: {
+    basicRegular: {
+      instances: [
+        {
+          name: "1-1-10",
+          ram: 1,
+          vCPU: 1,
+          pricePerHour: 0.02254,
+          pricePerMonth: 15.15,
+          storageMin: 10,
+          storageMax: 30,
+        },
+        {
+          name: "1-2-30",
+          ram: 2,
+          vCPU: 1,
+          pricePerHour: 0.04531,
+          pricePerMonth: 30.45,
+          storageMin: 30,
+          storageMax: 60,
+        },
+        {
+          name: "2-4-60",
+          ram: 4,
+          vCPU: 2,
+          pricePerHour: 0.09063,
+          pricePerMonth: 60.9,
+          storageMin: 60,
+          storageMax: 120,
+        },
+        {
+          name: "4-8-140",
+          ram: 8,
+          vCPU: 4,
+          pricePerHour: 0.1817,
+          pricePerMonth: 122.1,
+          storageMin: 140,
+          storageMax: 280,
+        },
+        {
+          name: "6-16-290",
+          ram: 16,
+          vCPU: 6,
+          pricePerHour: 0.36362,
+          pricePerMonth: 244.35,
+          storageMin: 290,
+          storageMax: 580,
+        },
+      ],
+      instancesWith1Node: [
+        {
+          name: "1-2-30",
+          ram: 2,
+          vCPU: 1,
+          pricePerHour: 0.09062,
+          pricePerMonth: 60.9,
+          storageMin: 30,
+          storageMax: 60,
+        },
+        {
+          name: "2-4-60",
+          ram: 4,
+          vCPU: 2,
+          pricePerHour: 0.18125,
+          pricePerMonth: 121.8,
+          storageMin: 60,
+          storageMax: 120,
+        },
+        {
+          name: "4-8-140",
+          ram: 8,
+          vCPU: 4,
+          pricePerHour: 0.36339,
+          pricePerMonth: 244.2,
+          storageMin: 140,
+          storageMax: 280,
+        },
+        {
+          name: "6-16-290",
+          ram: 16,
+          vCPU: 6,
+          pricePerHour: 0.72723,
+          pricePerMonth: 488.7,
+          storageMin: 290,
+          storageMax: 580,
+        },
+      ],
+      instancesWith2Nodes: [
+        {
+          name: "1-2-30",
+          ram: 2,
+          vCPU: 1,
+          pricePerHour: 0.13594,
+          pricePerMonth: 91.35,
+          storageMin: 30,
+          storageMax: 60,
+        },
+        {
+          name: "2-4-60",
+          ram: 4,
+          vCPU: 2,
+          pricePerHour: 0.27188,
+          pricePerMonth: 182.7,
+          storageMin: 60,
+          storageMax: 120,
+        },
+        {
+          name: "4-8-140",
+          ram: 8,
+          vCPU: 4,
+          pricePerHour: 0.54509,
+          pricePerMonth: 366.3,
+          storageMin: 140,
+          storageMax: 280,
+        },
+        {
+          name: "6-16-290",
+          ram: 16,
+          vCPU: 6,
+          pricePerHour: 1.09085,
+          pricePerMonth: 733.05,
+          storageMin: 290,
+          storageMax: 580,
+        },
+      ],
     },
-    {
-      name: "1-2-30",
-      ram: 2,
-      vCPU: 1,
-      pricePerHour: 0.04531,
-      pricePerMonth: 30.45,
-      storageMin: 30,
-      storageMax: 60,
+    basicPremiumIntel: {
+      instances: [
+        {
+          name: "1-1-20",
+          ram: 1,
+          vCPU: 1,
+          pricePerHour: 0.03021,
+          pricePerMonth: 20.3,
+          storageMin: 20,
+          storageMax: 40,
+        },
+        {
+          name: "1-2-50",
+          ram: 2,
+          vCPU: 1,
+          pricePerHour: 0.06064,
+          pricePerMonth: 40.75,
+          storageMin: 50,
+          storageMax: 100,
+        },
+        {
+          name: "2-4-80",
+          ram: 4,
+          vCPU: 2,
+          pricePerHour: 0.12083,
+          pricePerMonth: 81.2,
+          storageMin: 80,
+          storageMax: 160,
+        },
+        {
+          name: "2-8-100",
+          ram: 8,
+          vCPU: 2,
+          pricePerHour: 0.16443,
+          pricePerMonth: 110.5,
+          storageMin: 100,
+          storageMax: 200,
+        },
+        {
+          name: "4-8-160",
+          ram: 8,
+          vCPU: 4,
+          pricePerHour: 0.24167,
+          pricePerMonth: 162.4,
+          storageMin: 160,
+          storageMax: 320,
+        },
+        {
+          name: "4-16-200",
+          ram: 16,
+          vCPU: 4,
+          pricePerHour: 0.32887,
+          pricePerMonth: 221.0,
+          storageMin: 200,
+          storageMax: 400,
+        },
+        {
+          name: "8-32-400",
+          ram: 32,
+          vCPU: 8,
+          pricePerHour: 0.65774,
+          pricePerMonth: 442.0,
+          storageMin: 400,
+          storageMax: 800,
+        },
+        {
+          name: "16-64-800",
+          ram: 64,
+          vCPU: 16,
+          pricePerHour: 1.31548,
+          pricePerMonth: 884.0,
+          storageMin: 800,
+          storageMax: 1600,
+        },
+      ],
+      instancesWith1Node: [
+        {
+          name: "1-2-50",
+          ram: 2,
+          vCPU: 1,
+          pricePerHour: 0.12128,
+          pricePerMonth: 81.5,
+          storageMin: 50,
+          storageMax: 100,
+        },
+        {
+          name: "2-4-80",
+          ram: 4,
+          vCPU: 2,
+          pricePerHour: 0.24167,
+          pricePerMonth: 162.4,
+          storageMin: 80,
+          storageMax: 160,
+        },
+        {
+          name: "2-8-100",
+          ram: 8,
+          vCPU: 2,
+          pricePerHour: 0.32887,
+          pricePerMonth: 221.0,
+          storageMin: 100,
+          storageMax: 200,
+        },
+        {
+          name: "4-8-160",
+          ram: 8,
+          vCPU: 4,
+          pricePerHour: 0.48333,
+          pricePerMonth: 324.8,
+          storageMin: 160,
+          storageMax: 320,
+        },
+        {
+          name: "4-16-200",
+          ram: 16,
+          vCPU: 4,
+          pricePerHour: 0.65774,
+          pricePerMonth: 442.0,
+          storageMin: 200,
+          storageMax: 400,
+        },
+        {
+          name: "8-32-400",
+          ram: 32,
+          vCPU: 8,
+          pricePerHour: 1.31548,
+          pricePerMonth: 884.0,
+          storageMin: 400,
+          storageMax: 800,
+        },
+        {
+          name: "16-64-800",
+          ram: 64,
+          vCPU: 16,
+          pricePerHour: 2.63095,
+          pricePerMonth: 1768.0,
+          storageMin: 800,
+          storageMax: 1600,
+        },
+      ],
+      instancesWith2Nodes: [
+        {
+          name: "1-2-50",
+          ram: 2,
+          vCPU: 1,
+          pricePerHour: 0.18192,
+          pricePerMonth: 122.25,
+          storageMin: 50,
+          storageMax: 100,
+        },
+        {
+          name: "2-4-80",
+          ram: 4,
+          vCPU: 2,
+          pricePerHour: 0.3625,
+          pricePerMonth: 243.6,
+          storageMin: 80,
+          storageMax: 160,
+        },
+        {
+          name: "2-8-100",
+          ram: 8,
+          vCPU: 2,
+          pricePerHour: 0.4933,
+          pricePerMonth: 331.5,
+          storageMin: 100,
+          storageMax: 200,
+        },
+        {
+          name: "4-8-160",
+          ram: 8,
+          vCPU: 4,
+          pricePerHour: 0.725,
+          pricePerMonth: 487.2,
+          storageMin: 160,
+          storageMax: 320,
+        },
+        {
+          name: "4-16-200",
+          ram: 16,
+          vCPU: 4,
+          pricePerHour: 0.98661,
+          pricePerMonth: 663.0,
+          storageMin: 200,
+          storageMax: 400,
+        },
+        {
+          name: "8-32-400",
+          ram: 32,
+          vCPU: 8,
+          pricePerHour: 1.97321,
+          pricePerMonth: 1326.0,
+          storageMin: 400,
+          storageMax: 800,
+        },
+        {
+          name: "16-64-800",
+          ram: 64,
+          vCPU: 16,
+          pricePerHour: 3.94643,
+          pricePerMonth: 2652.0,
+          storageMin: 800,
+          storageMax: 1600,
+        },
+      ],
     },
-    {
-      name: "2-4-80",
-      ram: 4,
-      vCPU: 2,
-      pricePerHour: 0.09063,
-      pricePerMonth: 60.9,
-      storageMin: 60,
-      storageMax: 120,
+    basicPremiumAMD: {
+      instances: [
+        {
+          name: "1-1-15",
+          ram: 1,
+          vCPU: 1,
+          pricePerHour: 0.02712,
+          pricePerMonth: 18.23,
+          storageMin: 15,
+          storageMax: 30,
+        },
+        {
+          name: "1-2-40",
+          ram: 2,
+          vCPU: 1,
+          pricePerHour: 0.05446,
+          pricePerMonth: 36.6,
+          storageMin: 40,
+          storageMax: 80,
+        },
+        {
+          name: "2-4-60",
+          ram: 4,
+          vCPU: 2,
+          pricePerHour: 0.10848,
+          pricePerMonth: 72.9,
+          storageMin: 60,
+          storageMax: 120,
+        },
+        {
+          name: "2-8-80",
+          ram: 8,
+          vCPU: 2,
+          pricePerHour: 0.14762,
+          pricePerMonth: 99.2,
+          storageMin: 80,
+          storageMax: 160,
+        },
+        {
+          name: "4-8-140",
+          ram: 8,
+          vCPU: 4,
+          pricePerHour: 0.21741,
+          pricePerMonth: 146.1,
+          storageMin: 140,
+          storageMax: 280,
+        },
+        {
+          name: "4-16-170",
+          ram: 16,
+          vCPU: 4,
+          pricePerHour: 0.29546,
+          pricePerMonth: 198.55,
+          storageMin: 170,
+          storageMax: 340,
+        },
+        {
+          name: "8-32-340",
+          ram: 32,
+          vCPU: 8,
+          pricePerHour: 0.59092,
+          pricePerMonth: 397.1,
+          storageMin: 340,
+          storageMax: 680,
+        },
+        {
+          name: "16-64-680",
+          ram: 64,
+          vCPU: 16,
+          pricePerHour: 1.16399,
+          pricePerMonth: 782.2,
+          storageMin: 680,
+          storageMax: 1360,
+        },
+      ],
+      instancesWith1Node: [
+        {
+          name: "1-2-40",
+          ram: 2,
+          vCPU: 1,
+          pricePerHour: 0.10893,
+          pricePerMonth: 73.2,
+          storageMin: 40,
+          storageMax: 80,
+        },
+        {
+          name: "2-4-60",
+          ram: 4,
+          vCPU: 2,
+          pricePerHour: 0.21696,
+          pricePerMonth: 145.8,
+          storageMin: 60,
+          storageMax: 120,
+        },
+        {
+          name: "2-8-80",
+          ram: 8,
+          vCPU: 2,
+          pricePerHour: 0.29524,
+          pricePerMonth: 198.4,
+          storageMin: 80,
+          storageMax: 160,
+        },
+        {
+          name: "4-8-140",
+          ram: 8,
+          vCPU: 4,
+          pricePerHour: 0.43482,
+          pricePerMonth: 292.2,
+          storageMin: 140,
+          storageMax: 280,
+        },
+        {
+          name: "4-16-170",
+          ram: 16,
+          vCPU: 4,
+          pricePerHour: 0.59092,
+          pricePerMonth: 397.1,
+          storageMin: 170,
+          storageMax: 340,
+        },
+        {
+          name: "8-32-340",
+          ram: 32,
+          vCPU: 8,
+          pricePerHour: 1.18185,
+          pricePerMonth: 794.2,
+          storageMin: 340,
+          storageMax: 680,
+        },
+        {
+          name: "16-64-680",
+          ram: 64,
+          vCPU: 16,
+          pricePerHour: 2.32798,
+          pricePerMonth: 1564.4,
+          storageMin: 680,
+          storageMax: 1360,
+        },
+      ],
+      instancesWith2Nodes: [
+        {
+          name: "1-2-40",
+          ram: 2,
+          vCPU: 1,
+          pricePerHour: 0.16339,
+          pricePerMonth: 109.8,
+          storageMin: 40,
+          storageMax: 80,
+        },
+        {
+          name: "2-4-60",
+          ram: 4,
+          vCPU: 2,
+          pricePerHour: 0.32545,
+          pricePerMonth: 218.7,
+          storageMin: 60,
+          storageMax: 120,
+        },
+        {
+          name: "2-8-80",
+          ram: 8,
+          vCPU: 2,
+          pricePerHour: 0.44286,
+          pricePerMonth: 297.6,
+          storageMin: 80,
+          storageMax: 160,
+        },
+        {
+          name: "4-8-140",
+          ram: 8,
+          vCPU: 4,
+          pricePerHour: 0.65223,
+          pricePerMonth: 438.3,
+          storageMin: 140,
+          storageMax: 280,
+        },
+        {
+          name: "4-16-170",
+          ram: 16,
+          vCPU: 4,
+          pricePerHour: 0.88638,
+          pricePerMonth: 595.65,
+          storageMin: 170,
+          storageMax: 340,
+        },
+        {
+          name: "8-32-340",
+          ram: 32,
+          vCPU: 8,
+          pricePerHour: 1.77277,
+          pricePerMonth: 1191.3,
+          storageMin: 340,
+          storageMax: 680,
+        },
+        {
+          name: "16-64-680",
+          ram: 64,
+          vCPU: 16,
+          pricePerHour: 3.49196,
+          pricePerMonth: 2346.6,
+          storageMin: 680,
+          storageMax: 1360,
+        },
+      ],
     },
-    {
-      name: "4-8-175",
-      ram: 8,
-      vCPU: 4,
-      pricePerHour: 0.1817,
-      pricePerMonth: 122.1,
-      storageMin: 140,
-      storageMax: 280,
+    generalPurpose: {
+      instances: [
+        {
+          name: "2-8-30",
+          ram: 8,
+          vCPU: 2,
+          pricePerHour: 0.16882,
+          pricePerMonth: 113.45,
+          storageMin: 30,
+          storageMax: 60,
+        },
+        {
+          name: "4-16-70",
+          ram: 16,
+          vCPU: 4,
+          pricePerHour: 0.33787,
+          pricePerMonth: 227.05,
+          storageMin: 70,
+          storageMax: 140,
+        },
+        {
+          name: "8-32-160",
+          ram: 32,
+          vCPU: 8,
+          pricePerHour: 0.66429,
+          pricePerMonth: 446.4,
+          storageMin: 160,
+          storageMax: 320,
+        },
+        {
+          name: "16-64-360",
+          ram: 64,
+          vCPU: 16,
+          pricePerHour: 1.33839,
+          pricePerMonth: 899.4,
+          storageMin: 360,
+          storageMax: 720,
+        },
+        {
+          name: "32-128-760",
+          ram: 128,
+          vCPU: 32,
+          pricePerHour: 2.71637,
+          pricePerMonth: 1825.4,
+          storageMin: 760,
+          storageMax: 1520,
+        },
+        {
+          name: "40-160-960",
+          ram: 160,
+          vCPU: 40,
+          pricePerHour: 3.39792,
+          pricePerMonth: 2283.4,
+          storageMin: 960,
+          storageMax: 1920,
+        },
+      ],
+      instancesWith1Node: [
+        {
+          name: "2-8-30",
+          ram: 8,
+          vCPU: 2,
+          pricePerHour: 0.33765,
+          pricePerMonth: 226.9,
+          storageMin: 30,
+          storageMax: 60,
+        },
+        {
+          name: "4-16-70",
+          ram: 16,
+          vCPU: 4,
+          pricePerHour: 0.67574,
+          pricePerMonth: 454.1,
+          storageMin: 70,
+          storageMax: 140,
+        },
+        {
+          name: "8-32-160",
+          ram: 32,
+          vCPU: 8,
+          pricePerHour: 1.32857,
+          pricePerMonth: 892.8,
+          storageMin: 160,
+          storageMax: 320,
+        },
+        {
+          name: "16-64-360",
+          ram: 64,
+          vCPU: 16,
+          pricePerHour: 2.67679,
+          pricePerMonth: 1798.8,
+          storageMin: 360,
+          storageMax: 720,
+        },
+        {
+          name: "32-128-760",
+          ram: 128,
+          vCPU: 32,
+          pricePerHour: 5.43274,
+          pricePerMonth: 3650.8,
+          storageMin: 760,
+          storageMax: 1520,
+        },
+        {
+          name: "40-160-960",
+          ram: 160,
+          vCPU: 40,
+          pricePerHour: 6.79583,
+          pricePerMonth: 4566.8,
+          storageMin: 960,
+          storageMax: 1920,
+        },
+      ],
+      instancesWith2Nodes: [
+        {
+          name: "2-8-30",
+          ram: 8,
+          vCPU: 2,
+          pricePerHour: 0.50647,
+          pricePerMonth: 340.35,
+          storageMin: 30,
+          storageMax: 60,
+        },
+        {
+          name: "4-16-70",
+          ram: 16,
+          vCPU: 4,
+          pricePerHour: 1.01362,
+          pricePerMonth: 681.15,
+          storageMin: 70,
+          storageMax: 140,
+        },
+        {
+          name: "8-32-160",
+          ram: 32,
+          vCPU: 8,
+          pricePerHour: 1.99286,
+          pricePerMonth: 1339.2,
+          storageMin: 160,
+          storageMax: 320,
+        },
+        {
+          name: "16-64-360",
+          ram: 64,
+          vCPU: 16,
+          pricePerHour: 4.01518,
+          pricePerMonth: 2698.2,
+          storageMin: 360,
+          storageMax: 720,
+        },
+        {
+          name: "32-128-760",
+          ram: 128,
+          vCPU: 32,
+          pricePerHour: 8.14911,
+          pricePerMonth: 5476.2,
+          storageMin: 760,
+          storageMax: 1520,
+        },
+        {
+          name: "40-160-960",
+          ram: 160,
+          vCPU: 40,
+          pricePerHour: 10.19375,
+          pricePerMonth: 6850.2,
+          storageMin: 960,
+          storageMax: 1920,
+        },
+      ],
     },
-    {
-      name: "6-16-350",
-      ram: 16,
-      vCPU: 6,
-      pricePerHour: 0.36362,
-      pricePerMonth: 244.35,
-      storageMin: 290,
-      storageMax: 580,
+    storageOptimized: {
+      instances: [
+        {
+          name: "2-16-300",
+          ram: 16,
+          vCPU: 2,
+          pricePerHour: 0.32217,
+          pricePerMonth: 216.5,
+          storageMin: 300,
+          storageMax: 600,
+        },
+        {
+          name: "4-32-600",
+          ram: 32,
+          vCPU: 4,
+          pricePerHour: 0.64137,
+          pricePerMonth: 431.0,
+          storageMin: 600,
+          storageMax: 1200,
+        },
+        {
+          name: "8-64-1200",
+          ram: 64,
+          vCPU: 8,
+          pricePerHour: 1.29167,
+          pricePerMonth: 868.0,
+          storageMin: 1200,
+          storageMax: 2400,
+        },
+        {
+          name: "16-128-2400",
+          ram: 128,
+          vCPU: 16,
+          pricePerHour: 2.58036,
+          pricePerMonth: 1734.0,
+          storageMin: 2400,
+          storageMax: 4800,
+        },
+        {
+          name: "24-192-3600",
+          ram: 192,
+          vCPU: 24,
+          pricePerHour: 3.87202,
+          pricePerMonth: 2602.0,
+          storageMin: 3600,
+          storageMax: 7200,
+        },
+        {
+          name: "32-256-4800",
+          ram: 256,
+          vCPU: 32,
+          pricePerHour: 5.14583,
+          pricePerMonth: 3458.0,
+          storageMin: 4800,
+          storageMax: 9600,
+        },
+      ],
+      instancesWith1Node: [
+        {
+          name: "2-16-300",
+          ram: 16,
+          vCPU: 2,
+          pricePerHour: 0.64435,
+          pricePerMonth: 433.0,
+          storageMin: 300,
+          storageMax: 600,
+        },
+        {
+          name: "4-32-600",
+          ram: 32,
+          vCPU: 4,
+          pricePerHour: 1.28274,
+          pricePerMonth: 862.0,
+          storageMin: 600,
+          storageMax: 1200,
+        },
+        {
+          name: "8-64-1200",
+          ram: 64,
+          vCPU: 8,
+          pricePerHour: 2.58333,
+          pricePerMonth: 1736.0,
+          storageMin: 1200,
+          storageMax: 2400,
+        },
+        {
+          name: "16-128-2400",
+          ram: 128,
+          vCPU: 16,
+          pricePerHour: 5.16071,
+          pricePerMonth: 3468.0,
+          storageMin: 2400,
+          storageMax: 4800,
+        },
+        {
+          name: "24-192-3600",
+          ram: 192,
+          vCPU: 24,
+          pricePerHour: 7.74405,
+          pricePerMonth: 5204.0,
+          storageMin: 3600,
+          storageMax: 7200,
+        },
+        {
+          name: "32-256-4800",
+          ram: 256,
+          vCPU: 32,
+          pricePerHour: 10.29167,
+          pricePerMonth: 6916.0,
+          storageMin: 4800,
+          storageMax: 9600,
+        },
+      ],
+      instancesWith2Nodes: [
+        {
+          name: "2-16-300",
+          ram: 16,
+          vCPU: 2,
+          pricePerHour: 0.96652,
+          pricePerMonth: 649.5,
+          storageMin: 300,
+          storageMax: 600,
+        },
+        {
+          name: "4-32-600",
+          ram: 32,
+          vCPU: 4,
+          pricePerHour: 1.92411,
+          pricePerMonth: 1293.0,
+          storageMin: 600,
+          storageMax: 1200,
+        },
+        {
+          name: "8-64-1200",
+          ram: 64,
+          vCPU: 8,
+          pricePerHour: 3.875,
+          pricePerMonth: 2604.0,
+          storageMin: 1200,
+          storageMax: 2400,
+        },
+        {
+          name: "16-128-2400",
+          ram: 128,
+          vCPU: 16,
+          pricePerHour: 7.74107,
+          pricePerMonth: 5202.0,
+          storageMin: 2400,
+          storageMax: 4800,
+        },
+        {
+          name: "24-192-3600",
+          ram: 192,
+          vCPU: 24,
+          pricePerHour: 11.61607,
+          pricePerMonth: 7806.0,
+          storageMin: 3600,
+          storageMax: 7200,
+        },
+        {
+          name: "32-256-4800",
+          ram: 256,
+          vCPU: 32,
+          pricePerHour: 15.4375,
+          pricePerMonth: 10374.0,
+          storageMin: 4800,
+          storageMax: 9600,
+        },
+      ],
     },
-  ],
+  },
   storagePerGB: 0.215, // $0.215 per GiB per month
   dataTransferPerGB: 0.01, // $0.01 per GiB for outbound (egress) traffic
   includedDataTransfer: 1000, // 1000 GiB included per month for Managed Databases
@@ -588,6 +1420,12 @@ const inputs = reactive<{
   auroraServerlessConfig: "standard" | "ioOptimized";
   neonTier: "free" | "launch" | "scale";
   digitalOceanInstanceName: string;
+  digitalOceanCPUOption:
+    | "basicRegular"
+    | "basicPremiumIntel"
+    | "basicPremiumAMD"
+    | "generalPurpose"
+    | "storageOptimized";
   digitalOceanAdditionalNodes: number;
 }>({
   // Common inputs
@@ -616,6 +1454,7 @@ const inputs = reactive<{
 
   // Digital Ocean
   digitalOceanInstanceName: "1-2-30",
+  digitalOceanCPUOption: "basicRegular",
   digitalOceanAdditionalNodes: 0,
 });
 
@@ -645,12 +1484,73 @@ const planetscaleCluster = computed(() => {
 });
 
 const digitalOceanInstance = computed(() => {
+  const cpuOption =
+    digitalOceanPricing.cpuOptions[inputs.digitalOceanCPUOption];
+  if (!cpuOption) {
+    return null;
+  }
+
+  // Select instance list based on number of additional nodes
+  let instanceList = cpuOption.instances || [];
+  if (
+    inputs.digitalOceanAdditionalNodes === 1 &&
+    cpuOption.instancesWith1Node
+  ) {
+    instanceList = cpuOption.instancesWith1Node;
+  } else if (
+    inputs.digitalOceanAdditionalNodes === 2 &&
+    cpuOption.instancesWith2Nodes
+  ) {
+    instanceList = cpuOption.instancesWith2Nodes;
+  }
+
+  if (!instanceList || instanceList.length === 0) {
+    return null;
+  }
+
   return (
-    digitalOceanPricing.instances.find(
-      (i) => i.name === inputs.digitalOceanInstanceName
-    ) || digitalOceanPricing.instances[1]
+    instanceList.find((i) => i.name === inputs.digitalOceanInstanceName) ||
+    instanceList[0]
   );
 });
+
+// Watch for changes to CPU option or additional nodes and reset instance name
+watch(
+  [
+    () => inputs.digitalOceanCPUOption,
+    () => inputs.digitalOceanAdditionalNodes,
+  ],
+  () => {
+    const cpuOption =
+      digitalOceanPricing.cpuOptions[inputs.digitalOceanCPUOption];
+    if (!cpuOption) return;
+
+    // Select instance list based on number of additional nodes
+    let instanceList = cpuOption.instances || [];
+    if (
+      inputs.digitalOceanAdditionalNodes === 1 &&
+      (cpuOption as any).instancesWith1Node
+    ) {
+      instanceList = (cpuOption as any).instancesWith1Node;
+    } else if (
+      inputs.digitalOceanAdditionalNodes === 2 &&
+      (cpuOption as any).instancesWith2Nodes
+    ) {
+      instanceList = (cpuOption as any).instancesWith2Nodes;
+    }
+
+    if (instanceList && instanceList.length > 0) {
+      // Check if current instance name exists in the new list
+      const currentInstanceExists = instanceList.some(
+        (i: any) => i.name === inputs.digitalOceanInstanceName
+      );
+      // If not, reset to first available instance
+      if (!currentInstanceExists) {
+        inputs.digitalOceanInstanceName = instanceList[0]?.name || "";
+      }
+    }
+  }
+);
 
 // Vercel Static IP cost calculation
 const vercelStaticIPCost = computed(() => {
@@ -802,11 +1702,42 @@ const planetscaleCost = computed(() => {
 });
 
 const digitalOceanCost = computed(() => {
-  const instance = digitalOceanInstance.value!;
-  const totalNodes = 1 + inputs.digitalOceanAdditionalNodes;
+  const instance = digitalOceanInstance.value;
+  if (!instance) {
+    return {
+      instance: 0,
+      storage: 0,
+      dataTransfer: 0,
+      vercelStaticIP: vercelStaticIPCost.value.total,
+      total: vercelStaticIPCost.value.total,
+    };
+  }
 
-  // Instance cost (primary + additional nodes)
-  const instanceCost = instance.pricePerMonth * totalNodes;
+  // Instance cost calculation
+  // For base instances (0 additional nodes), multiply by totalNodes if nodes are added
+  // For instancesWith1Node/instancesWith2Nodes, price already includes additional nodes
+  let instanceCost = instance.pricePerMonth;
+  const cpuOption =
+    digitalOceanPricing.cpuOptions[inputs.digitalOceanCPUOption];
+  if (cpuOption) {
+    const isFrom1NodeList =
+      inputs.digitalOceanAdditionalNodes === 1 &&
+      cpuOption.instancesWith1Node?.some((i) => i.name === instance.name);
+    const isFrom2NodeList =
+      inputs.digitalOceanAdditionalNodes === 2 &&
+      cpuOption.instancesWith2Nodes?.some((i) => i.name === instance.name);
+
+    // If using base instances and have additional nodes, multiply
+    if (
+      !isFrom1NodeList &&
+      !isFrom2NodeList &&
+      inputs.digitalOceanAdditionalNodes > 0
+    ) {
+      instanceCost =
+        instance.pricePerMonth * (1 + inputs.digitalOceanAdditionalNodes);
+    }
+    // Otherwise, price already includes the nodes (for 1Node/2Node lists) or is base price
+  }
 
   // Storage cost: $0.215 per GiB per month
   // Note: Digital Ocean storage is separate from instance pricing
@@ -1137,14 +2068,52 @@ const formatCurrency = (value: number) => {
                 Digital Ocean PostgreSQL
               </h3>
               <div class="space-y-4">
+                <UFormField label="CPU Options" name="digitalOceanCPU">
+                  <USelect
+                    v-model="inputs.digitalOceanCPUOption"
+                    :items="[
+                      { label: 'Basic Regular', value: 'basicRegular' },
+                      {
+                        label: 'Basic Premium Intel',
+                        value: 'basicPremiumIntel',
+                      },
+                      { label: 'Basic Premium AMD', value: 'basicPremiumAMD' },
+                      { label: 'General Purpose', value: 'generalPurpose' },
+                      { label: 'Storage Optimized', value: 'storageOptimized' },
+                    ]"
+                  />
+                  <template #hint>
+                    Select the CPU option for your database instance
+                  </template>
+                </UFormField>
+
                 <UFormField label="Instance Type" name="digitalOceanInstance">
                   <USelect
                     v-model="inputs.digitalOceanInstanceName"
                     :items="
-                      digitalOceanPricing.instances.map((i) => ({
-                        label: `${i.ram} GiB RAM, ${i.vCPU} vCPU - $${i.pricePerMonth}/mo`,
-                        value: i.name,
-                      }))
+                      (() => {
+                        const cpuOption =
+                          digitalOceanPricing.cpuOptions[
+                            inputs.digitalOceanCPUOption
+                          ];
+                        if (!cpuOption) return [];
+                        let instanceList = cpuOption.instances || [];
+                        if (
+                          inputs.digitalOceanAdditionalNodes === 1 &&
+                          cpuOption.instancesWith1Node
+                        ) {
+                          instanceList = cpuOption.instancesWith1Node;
+                        } else if (
+                          inputs.digitalOceanAdditionalNodes === 2 &&
+                          cpuOption.instancesWith2Nodes
+                        ) {
+                          instanceList = cpuOption.instancesWith2Nodes;
+                        }
+                        return instanceList.map((i) => ({
+                          label: `${i.ram} GiB RAM, ${i.vCPU} vCPU - $${i.pricePerMonth}/mo`,
+                          value: i.name,
+                        }));
+                      })()
                     "
                   />
                   <template #hint>
@@ -1785,38 +2754,196 @@ const formatCurrency = (value: number) => {
                   </div>
                   <div>
                     <h4 class="text-sm font-medium mb-2">Instance Pricing</h4>
-                    <div class="space-y-3">
+                    <div class="space-y-6">
                       <div
-                        v-for="(instance, idx) in digitalOceanPricing.instances"
-                        :key="instance.name"
-                        class="p-3 border rounded-lg space-y-2"
+                        v-for="(
+                          cpuOption, cpuKey
+                        ) in digitalOceanPricing.cpuOptions"
+                        :key="cpuKey"
                       >
-                        <div class="font-medium">
-                          {{ instance.ram }} GiB RAM, {{ instance.vCPU }} vCPU
+                        <h5 class="text-xs font-medium mb-2 text-muted">
+                          {{
+                            cpuKey === "basicRegular"
+                              ? "Basic Regular"
+                              : cpuKey === "basicPremiumIntel"
+                              ? "Basic Premium Intel"
+                              : cpuKey === "basicPremiumAMD"
+                              ? "Basic Premium AMD"
+                              : cpuKey === "generalPurpose"
+                              ? "General Purpose"
+                              : "Storage Optimized"
+                          }}
+                        </h5>
+                        <!-- Base instances (0 additional nodes) -->
+                        <div
+                          v-if="
+                            cpuOption.instances &&
+                            cpuOption.instances.length > 0
+                          "
+                        >
+                          <h6 class="text-xs font-medium mb-2 text-muted">
+                            Base Instances (0 additional nodes)
+                          </h6>
+                          <div class="space-y-3">
+                            <div
+                              v-for="(instance, idx) in cpuOption.instances"
+                              :key="`${cpuKey}-base-${instance.name}`"
+                              class="p-3 border rounded-lg space-y-2"
+                            >
+                              <div class="font-medium">
+                                {{ instance.ram }} GiB RAM,
+                                {{ instance.vCPU }} vCPU
+                              </div>
+                              <div class="grid grid-cols-2 gap-2">
+                                <UFormField
+                                  :label="`Price/Hour ($)`"
+                                  :name="`digitalocean-${cpuKey}-base-hourly-${idx}`"
+                                >
+                                  <UInputNumber
+                                    v-model="
+                                      digitalOceanPricing.cpuOptions[cpuKey].instances[
+                                        idx
+                                      ]!.pricePerHour
+                                    "
+                                    :min="0"
+                                    :max="10"
+                                    :step="0.00001"
+                                  />
+                                </UFormField>
+                                <UFormField
+                                  :label="`Price/Month ($)`"
+                                  :name="`digitalocean-${cpuKey}-base-monthly-${idx}`"
+                                >
+                                  <UInputNumber
+                                    v-model="
+                                      digitalOceanPricing.cpuOptions[cpuKey].instances[
+                                        idx
+                                      ]!.pricePerMonth
+                                    "
+                                    :min="0"
+                                    :max="10000"
+                                    :step="0.01"
+                                  />
+                                </UFormField>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-2">
-                          <UFormField
-                            :label="`Price/Hour ($)`"
-                            :name="`digitalocean-instance-hourly-${idx}`"
-                          >
-                            <UInputNumber
-                              v-model="digitalOceanPricing.instances[idx]!.pricePerHour"
-                              :min="0"
-                              :max="10"
-                              :step="0.00001"
-                            />
-                          </UFormField>
-                          <UFormField
-                            :label="`Price/Month ($)`"
-                            :name="`digitalocean-instance-monthly-${idx}`"
-                          >
-                            <UInputNumber
-                              v-model="digitalOceanPricing.instances[idx]!.pricePerMonth"
-                              :min="0"
-                              :max="10000"
-                              :step="0.01"
-                            />
-                          </UFormField>
+                        <!-- Instances with 1 additional node -->
+                        <div
+                          v-if="
+                            cpuOption.instancesWith1Node &&
+                            cpuOption.instancesWith1Node.length > 0
+                          "
+                          class="mt-4"
+                        >
+                          <h6 class="text-xs font-medium mb-2 text-muted">
+                            Instances with 1 additional node
+                          </h6>
+                          <div class="space-y-3">
+                            <div
+                              v-for="(
+                                instance, idx
+                              ) in cpuOption.instancesWith1Node"
+                              :key="`${cpuKey}-1node-${instance.name}`"
+                              class="p-3 border rounded-lg space-y-2"
+                            >
+                              <div class="font-medium">
+                                {{ instance.ram }} GiB RAM,
+                                {{ instance.vCPU }} vCPU
+                              </div>
+                              <div class="grid grid-cols-2 gap-2">
+                                <UFormField
+                                  :label="`Price/Hour ($)`"
+                                  :name="`digitalocean-${cpuKey}-1node-hourly-${idx}`"
+                                >
+                                  <UInputNumber
+                                    v-model="
+                                      digitalOceanPricing.cpuOptions[cpuKey].instancesWith1Node[
+                                        idx
+                                      ]!.pricePerHour
+                                    "
+                                    :min="0"
+                                    :max="10"
+                                    :step="0.00001"
+                                  />
+                                </UFormField>
+                                <UFormField
+                                  :label="`Price/Month ($)`"
+                                  :name="`digitalocean-${cpuKey}-1node-monthly-${idx}`"
+                                >
+                                  <UInputNumber
+                                    v-model="
+                                      digitalOceanPricing.cpuOptions[cpuKey].instancesWith1Node[
+                                        idx
+                                      ]!.pricePerMonth
+                                    "
+                                    :min="0"
+                                    :max="10000"
+                                    :step="0.01"
+                                  />
+                                </UFormField>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Instances with 2 additional nodes -->
+                        <div
+                          v-if="
+                            cpuOption.instancesWith2Nodes &&
+                            cpuOption.instancesWith2Nodes.length > 0
+                          "
+                          class="mt-4"
+                        >
+                          <h6 class="text-xs font-medium mb-2 text-muted">
+                            Instances with 2 additional nodes
+                          </h6>
+                          <div class="space-y-3">
+                            <div
+                              v-for="(
+                                instance, idx
+                              ) in cpuOption.instancesWith2Nodes"
+                              :key="`${cpuKey}-2nodes-${instance.name}`"
+                              class="p-3 border rounded-lg space-y-2"
+                            >
+                              <div class="font-medium">
+                                {{ instance.ram }} GiB RAM,
+                                {{ instance.vCPU }} vCPU
+                              </div>
+                              <div class="grid grid-cols-2 gap-2">
+                                <UFormField
+                                  :label="`Price/Hour ($)`"
+                                  :name="`digitalocean-${cpuKey}-2nodes-hourly-${idx}`"
+                                >
+                                  <UInputNumber
+                                    v-model="
+                                      digitalOceanPricing.cpuOptions[cpuKey].instancesWith2Nodes[
+                                        idx
+                                      ]!.pricePerHour
+                                    "
+                                    :min="0"
+                                    :max="10"
+                                    :step="0.00001"
+                                  />
+                                </UFormField>
+                                <UFormField
+                                  :label="`Price/Month ($)`"
+                                  :name="`digitalocean-${cpuKey}-2nodes-monthly-${idx}`"
+                                >
+                                  <UInputNumber
+                                    v-model="
+                                      digitalOceanPricing.cpuOptions[cpuKey].instancesWith2Nodes[
+                                        idx
+                                      ]!.pricePerMonth
+                                    "
+                                    :min="0"
+                                    :max="10000"
+                                    :step="0.01"
+                                  />
+                                </UFormField>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -2069,7 +3196,18 @@ const formatCurrency = (value: number) => {
                 <div>
                   <h3 class="font-semibold">Digital Ocean PostgreSQL</h3>
                   <p class="text-xs text-muted mt-1">
-                    {{ digitalOceanInstance?.ram }} GiB RAM,
+                    {{
+                      inputs.digitalOceanCPUOption === "basicRegular"
+                        ? "Basic Regular"
+                        : inputs.digitalOceanCPUOption === "basicPremiumIntel"
+                        ? "Basic Premium Intel"
+                        : inputs.digitalOceanCPUOption === "basicPremiumAMD"
+                        ? "Basic Premium AMD"
+                        : inputs.digitalOceanCPUOption === "generalPurpose"
+                        ? "General Purpose"
+                        : "Storage Optimized"
+                    }}
+                    • {{ digitalOceanInstance?.ram }} GiB RAM,
                     {{ digitalOceanInstance?.vCPU }} vCPU
                     {{
                       inputs.digitalOceanAdditionalNodes > 0
