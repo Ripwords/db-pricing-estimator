@@ -1,12 +1,438 @@
 <script setup lang="ts">
 // AWS Aurora Postgres pricing - editable
 const auroraPricing = reactive({
-  // Provisioned instances
+  // Provisioned instances with Standard and I/O-Optimized pricing
   instances: [
-    { name: "db.r5.large", vCPU: 2, ram: 16, pricePerHour: 0.33 },
-    { name: "db.r5.xlarge", vCPU: 4, ram: 32, pricePerHour: 0.66 },
-    { name: "db.r5.2xlarge", vCPU: 8, ram: 64, pricePerHour: 1.32 },
-    { name: "db.r5.4xlarge", vCPU: 16, ram: 128, pricePerHour: 2.64 },
+    // Standard Instances - Current Generation
+    {
+      name: "db.t4g.medium",
+      vCPU: 2,
+      ram: 4,
+      pricePerHourStandard: 0.114,
+      pricePerHourIOOptimized: 0.148,
+    },
+    {
+      name: "db.t4g.large",
+      vCPU: 2,
+      ram: 8,
+      pricePerHourStandard: 0.229,
+      pricePerHourIOOptimized: 0.298,
+    },
+    {
+      name: "db.t3.medium",
+      vCPU: 2,
+      ram: 4,
+      pricePerHourStandard: 0.126,
+      pricePerHourIOOptimized: 0.164,
+    },
+    {
+      name: "db.t3.large",
+      vCPU: 2,
+      ram: 8,
+      pricePerHourStandard: 0.252,
+      pricePerHourIOOptimized: 0.328,
+    },
+    // Optimized Reads Instances - Current Generation
+    {
+      name: "r6gd.xlarge",
+      vCPU: 4,
+      ram: 32,
+      pricePerHourStandard: 0.751,
+      pricePerHourIOOptimized: 0.976,
+    },
+    {
+      name: "r6gd.2xlarge",
+      vCPU: 8,
+      ram: 64,
+      pricePerHourStandard: 1.502,
+      pricePerHourIOOptimized: 1.953,
+    },
+    {
+      name: "r6gd.4xlarge",
+      vCPU: 16,
+      ram: 128,
+      pricePerHourStandard: 3.005,
+      pricePerHourIOOptimized: 3.907,
+    },
+    {
+      name: "r6gd.8xlarge",
+      vCPU: 32,
+      ram: 256,
+      pricePerHourStandard: 6.01,
+      pricePerHourIOOptimized: 7.813,
+    },
+    {
+      name: "r6gd.12xlarge",
+      vCPU: 48,
+      ram: 384,
+      pricePerHourStandard: 9.014,
+      pricePerHourIOOptimized: 11.718,
+    },
+    {
+      name: "r6gd.16xlarge",
+      vCPU: 64,
+      ram: 512,
+      pricePerHourStandard: 12.019,
+      pricePerHourIOOptimized: 15.625,
+    },
+    {
+      name: "r6id.24xlarge",
+      vCPU: 96,
+      ram: 768,
+      pricePerHourStandard: 20.16,
+      pricePerHourIOOptimized: 26.208,
+    },
+    {
+      name: "r6id.32xlarge",
+      vCPU: 128,
+      ram: 1024,
+      pricePerHourStandard: 26.88,
+      pricePerHourIOOptimized: 34.944,
+    },
+    // Memory Optimized Instances - Current Generation
+    {
+      name: "db.r8g.large",
+      vCPU: 2,
+      ram: 16,
+      pricePerHourStandard: 0.333,
+      pricePerHourIOOptimized: 0.433,
+    },
+    {
+      name: "db.r8g.xlarge",
+      vCPU: 4,
+      ram: 32,
+      pricePerHourStandard: 0.666,
+      pricePerHourIOOptimized: 0.866,
+    },
+    {
+      name: "db.r8g.2xlarge",
+      vCPU: 8,
+      ram: 64,
+      pricePerHourStandard: 1.332,
+      pricePerHourIOOptimized: 1.732,
+    },
+    {
+      name: "db.r8g.4xlarge",
+      vCPU: 16,
+      ram: 128,
+      pricePerHourStandard: 2.664,
+      pricePerHourIOOptimized: 3.464,
+    },
+    {
+      name: "db.r8g.8xlarge",
+      vCPU: 32,
+      ram: 256,
+      pricePerHourStandard: 5.328,
+      pricePerHourIOOptimized: 6.928,
+    },
+    {
+      name: "db.r8g.12xlarge",
+      vCPU: 48,
+      ram: 384,
+      pricePerHourStandard: 7.992,
+      pricePerHourIOOptimized: 10.392,
+    },
+    {
+      name: "db.r8g.16xlarge",
+      vCPU: 64,
+      ram: 512,
+      pricePerHourStandard: 10.656,
+      pricePerHourIOOptimized: 13.856,
+    },
+    {
+      name: "db.r8g.24xlarge",
+      vCPU: 96,
+      ram: 768,
+      pricePerHourStandard: 15.984,
+      pricePerHourIOOptimized: 20.784,
+    },
+    {
+      name: "db.r8g.48xlarge",
+      vCPU: 192,
+      ram: 1536,
+      pricePerHourStandard: 31.968,
+      pricePerHourIOOptimized: 41.568,
+    },
+    {
+      name: "db.r7g.large",
+      vCPU: 2,
+      ram: 16,
+      pricePerHourStandard: 0.333,
+      pricePerHourIOOptimized: 0.433,
+    },
+    {
+      name: "db.r7g.xlarge",
+      vCPU: 4,
+      ram: 32,
+      pricePerHourStandard: 0.665,
+      pricePerHourIOOptimized: 0.865,
+    },
+    {
+      name: "db.r7g.2xlarge",
+      vCPU: 8,
+      ram: 64,
+      pricePerHourStandard: 1.331,
+      pricePerHourIOOptimized: 1.73,
+    },
+    {
+      name: "db.r7g.4xlarge",
+      vCPU: 16,
+      ram: 128,
+      pricePerHourStandard: 2.662,
+      pricePerHourIOOptimized: 3.461,
+    },
+    {
+      name: "db.r7g.8xlarge",
+      vCPU: 32,
+      ram: 256,
+      pricePerHourStandard: 5.324,
+      pricePerHourIOOptimized: 6.921,
+    },
+    {
+      name: "db.r7g.12xlarge",
+      vCPU: 48,
+      ram: 384,
+      pricePerHourStandard: 7.985,
+      pricePerHourIOOptimized: 10.381,
+    },
+    {
+      name: "db.r7g.16xlarge",
+      vCPU: 64,
+      ram: 512,
+      pricePerHourStandard: 10.647,
+      pricePerHourIOOptimized: 13.841,
+    },
+    {
+      name: "db.r7i.large",
+      vCPU: 2,
+      ram: 16,
+      pricePerHourStandard: 0.35,
+      pricePerHourIOOptimized: 0.455,
+    },
+    {
+      name: "db.r7i.xlarge",
+      vCPU: 4,
+      ram: 32,
+      pricePerHourStandard: 0.7,
+      pricePerHourIOOptimized: 0.91,
+    },
+    {
+      name: "db.r7i.2xlarge",
+      vCPU: 8,
+      ram: 64,
+      pricePerHourStandard: 1.4,
+      pricePerHourIOOptimized: 1.82,
+    },
+    {
+      name: "db.r7i.4xlarge",
+      vCPU: 16,
+      ram: 128,
+      pricePerHourStandard: 2.8,
+      pricePerHourIOOptimized: 3.64,
+    },
+    {
+      name: "db.r7i.8xlarge",
+      vCPU: 32,
+      ram: 256,
+      pricePerHourStandard: 5.6,
+      pricePerHourIOOptimized: 7.28,
+    },
+    {
+      name: "db.r7i.12xlarge",
+      vCPU: 48,
+      ram: 384,
+      pricePerHourStandard: 8.4,
+      pricePerHourIOOptimized: 10.92,
+    },
+    {
+      name: "db.r7i.16xlarge",
+      vCPU: 64,
+      ram: 512,
+      pricePerHourStandard: 11.2,
+      pricePerHourIOOptimized: 14.56,
+    },
+    {
+      name: "db.r7i.24xlarge",
+      vCPU: 96,
+      ram: 768,
+      pricePerHourStandard: 16.8,
+      pricePerHourIOOptimized: 21.84,
+    },
+    {
+      name: "db.r7i.48xlarge",
+      vCPU: 192,
+      ram: 1536,
+      pricePerHourStandard: 33.6,
+      pricePerHourIOOptimized: 43.68,
+    },
+    {
+      name: "db.r6g.large",
+      vCPU: 2,
+      ram: 16,
+      pricePerHourStandard: 0.313,
+      pricePerHourIOOptimized: 0.407,
+    },
+    {
+      name: "db.r6g.xlarge",
+      vCPU: 4,
+      ram: 32,
+      pricePerHourStandard: 0.627,
+      pricePerHourIOOptimized: 0.815,
+    },
+    {
+      name: "db.r6g.2xlarge",
+      vCPU: 8,
+      ram: 64,
+      pricePerHourStandard: 1.253,
+      pricePerHourIOOptimized: 1.629,
+    },
+    {
+      name: "db.r6g.4xlarge",
+      vCPU: 16,
+      ram: 128,
+      pricePerHourStandard: 2.506,
+      pricePerHourIOOptimized: 3.258,
+    },
+    {
+      name: "db.r6g.8xlarge",
+      vCPU: 32,
+      ram: 256,
+      pricePerHourStandard: 5.012,
+      pricePerHourIOOptimized: 6.516,
+    },
+    {
+      name: "db.r6g.12xlarge",
+      vCPU: 48,
+      ram: 384,
+      pricePerHourStandard: 7.518,
+      pricePerHourIOOptimized: 9.773,
+    },
+    {
+      name: "db.r6g.16xlarge",
+      vCPU: 64,
+      ram: 512,
+      pricePerHourStandard: 10.024,
+      pricePerHourIOOptimized: 13.031,
+    },
+    {
+      name: "db.r6i.large",
+      vCPU: 2,
+      ram: 16,
+      pricePerHourStandard: 0.35,
+      pricePerHourIOOptimized: 0.455,
+    },
+    {
+      name: "db.r6i.xlarge",
+      vCPU: 4,
+      ram: 32,
+      pricePerHourStandard: 0.7,
+      pricePerHourIOOptimized: 0.91,
+    },
+    {
+      name: "db.r6i.2xlarge",
+      vCPU: 8,
+      ram: 64,
+      pricePerHourStandard: 1.4,
+      pricePerHourIOOptimized: 1.82,
+    },
+    {
+      name: "db.r6i.4xlarge",
+      vCPU: 16,
+      ram: 128,
+      pricePerHourStandard: 2.8,
+      pricePerHourIOOptimized: 3.64,
+    },
+    {
+      name: "db.r6i.8xlarge",
+      vCPU: 32,
+      ram: 256,
+      pricePerHourStandard: 5.6,
+      pricePerHourIOOptimized: 7.28,
+    },
+    {
+      name: "db.r6i.12xlarge",
+      vCPU: 48,
+      ram: 384,
+      pricePerHourStandard: 8.4,
+      pricePerHourIOOptimized: 10.92,
+    },
+    {
+      name: "db.r6i.16xlarge",
+      vCPU: 64,
+      ram: 512,
+      pricePerHourStandard: 11.2,
+      pricePerHourIOOptimized: 14.56,
+    },
+    {
+      name: "db.r6i.24xlarge",
+      vCPU: 96,
+      ram: 768,
+      pricePerHourStandard: 16.8,
+      pricePerHourIOOptimized: 21.84,
+    },
+    {
+      name: "db.r6i.32xlarge",
+      vCPU: 128,
+      ram: 1024,
+      pricePerHourStandard: 22.4,
+      pricePerHourIOOptimized: 29.12,
+    },
+    {
+      name: "db.r5.large",
+      vCPU: 2,
+      ram: 16,
+      pricePerHourStandard: 0.35,
+      pricePerHourIOOptimized: 0.455,
+    },
+    {
+      name: "db.r5.xlarge",
+      vCPU: 4,
+      ram: 32,
+      pricePerHourStandard: 0.7,
+      pricePerHourIOOptimized: 0.91,
+    },
+    {
+      name: "db.r5.2xlarge",
+      vCPU: 8,
+      ram: 64,
+      pricePerHourStandard: 1.4,
+      pricePerHourIOOptimized: 1.82,
+    },
+    {
+      name: "db.r5.4xlarge",
+      vCPU: 16,
+      ram: 128,
+      pricePerHourStandard: 2.8,
+      pricePerHourIOOptimized: 3.64,
+    },
+    {
+      name: "db.r5.8xlarge",
+      vCPU: 32,
+      ram: 256,
+      pricePerHourStandard: 5.6,
+      pricePerHourIOOptimized: 7.28,
+    },
+    {
+      name: "db.r5.12xlarge",
+      vCPU: 48,
+      ram: 384,
+      pricePerHourStandard: 8.4,
+      pricePerHourIOOptimized: 10.92,
+    },
+    {
+      name: "db.r5.16xlarge",
+      vCPU: 64,
+      ram: 512,
+      pricePerHourStandard: 11.2,
+      pricePerHourIOOptimized: 14.56,
+    },
+    {
+      name: "db.r5.24xlarge",
+      vCPU: 96,
+      ram: 768,
+      pricePerHourStandard: 16.8,
+      pricePerHourIOOptimized: 21.84,
+    },
   ],
   // Provisioned pricing
   storagePerGB: 0.1,
@@ -84,6 +510,60 @@ const planetscalePricing = reactive({
   branchPerMonth: 0, // Branching included in HA plans
 });
 
+// Digital Ocean PostgreSQL pricing - editable
+const digitalOceanPricing = reactive({
+  instances: [
+    {
+      name: "1-1-8",
+      ram: 1,
+      vCPU: 1,
+      pricePerHour: 0.02254,
+      pricePerMonth: 15.15,
+      storageMin: 10,
+      storageMax: 30,
+    },
+    {
+      name: "1-2-30",
+      ram: 2,
+      vCPU: 1,
+      pricePerHour: 0.04531,
+      pricePerMonth: 30.45,
+      storageMin: 30,
+      storageMax: 60,
+    },
+    {
+      name: "2-4-80",
+      ram: 4,
+      vCPU: 2,
+      pricePerHour: 0.09063,
+      pricePerMonth: 60.9,
+      storageMin: 60,
+      storageMax: 120,
+    },
+    {
+      name: "4-8-175",
+      ram: 8,
+      vCPU: 4,
+      pricePerHour: 0.1817,
+      pricePerMonth: 122.1,
+      storageMin: 140,
+      storageMax: 280,
+    },
+    {
+      name: "6-16-350",
+      ram: 16,
+      vCPU: 6,
+      pricePerHour: 0.36362,
+      pricePerMonth: 244.35,
+      storageMin: 290,
+      storageMax: 580,
+    },
+  ],
+  storagePerGB: 0.215, // $0.215 per GiB per month
+  dataTransferPerGB: 0.01, // $0.01 per GiB for outbound (egress) traffic
+  includedDataTransfer: 1000, // 1000 GiB included per month for Managed Databases
+});
+
 // Vercel Static IP pricing
 const vercelStaticIPPricing = reactive({
   monthlyFee: 100, // $100/month per project
@@ -97,6 +577,7 @@ const inputs = reactive<{
   vercelStaticIP: boolean;
   auroraType: "provisioned" | "serverless";
   auroraInstanceName: string;
+  auroraProvisionedConfig: "standard" | "ioOptimized";
   auroraIORequests: number;
   auroraBackupGB: number;
   neonComputeUnits: number;
@@ -106,6 +587,8 @@ const inputs = reactive<{
   auroraServerlessACU: number;
   auroraServerlessConfig: "standard" | "ioOptimized";
   neonTier: "free" | "launch" | "scale";
+  digitalOceanInstanceName: string;
+  digitalOceanAdditionalNodes: number;
 }>({
   // Common inputs
   storageGB: 100,
@@ -115,6 +598,7 @@ const inputs = reactive<{
   // AWS Aurora
   auroraType: "serverless",
   auroraInstanceName: "db.r5.large",
+  auroraProvisionedConfig: "standard",
   auroraIORequests: 10, // millions per month
   auroraBackupGB: 50,
   // Aurora Serverless
@@ -129,14 +613,27 @@ const inputs = reactive<{
   // PlanetScale
   planetscaleClusterName: "PS-10",
   planetscaleBranches: 1,
+
+  // Digital Ocean
+  digitalOceanInstanceName: "1-2-30",
+  digitalOceanAdditionalNodes: 0,
 });
 
 // Computed instance/cluster objects
 const auroraInstance = computed(() => {
-  return (
+  const instance =
     auroraPricing.instances.find((i) => i.name === inputs.auroraInstanceName) ||
-    auroraPricing.instances[0]
-  );
+    auroraPricing.instances[0];
+  if (!instance) return null;
+
+  // Add computed pricePerHour based on selected config
+  return {
+    ...instance,
+    pricePerHour:
+      inputs.auroraProvisionedConfig === "ioOptimized"
+        ? instance.pricePerHourIOOptimized
+        : instance.pricePerHourStandard,
+  };
 });
 
 const planetscaleCluster = computed(() => {
@@ -144,6 +641,14 @@ const planetscaleCluster = computed(() => {
     planetscalePricing.clusters.find(
       (c) => c.name === inputs.planetscaleClusterName
     ) || planetscalePricing.clusters[1]
+  );
+});
+
+const digitalOceanInstance = computed(() => {
+  return (
+    digitalOceanPricing.instances.find(
+      (i) => i.name === inputs.digitalOceanInstanceName
+    ) || digitalOceanPricing.instances[1]
   );
 });
 
@@ -201,7 +706,18 @@ const auroraCost = computed(() => {
     };
   } else {
     // Aurora Provisioned pricing
-    const instance = auroraInstance.value!;
+    const instance = auroraInstance.value;
+    if (!instance) {
+      return {
+        instance: 0,
+        storage: 0,
+        io: 0,
+        backup: 0,
+        dataTransfer: 0,
+        vercelStaticIP: vercelStaticIPCost.value.total,
+        total: vercelStaticIPCost.value.total,
+      };
+    }
     const instanceCost = instance.pricePerHour * 24 * 30;
     const storageCost = inputs.storageGB * auroraPricing.storagePerGB;
     const ioCost = inputs.auroraIORequests * auroraPricing.ioPerMillion;
@@ -285,6 +801,36 @@ const planetscaleCost = computed(() => {
   };
 });
 
+const digitalOceanCost = computed(() => {
+  const instance = digitalOceanInstance.value!;
+  const totalNodes = 1 + inputs.digitalOceanAdditionalNodes;
+
+  // Instance cost (primary + additional nodes)
+  const instanceCost = instance.pricePerMonth * totalNodes;
+
+  // Storage cost: $0.215 per GiB per month
+  // Note: Digital Ocean storage is separate from instance pricing
+  const storageCost = inputs.storageGB * digitalOceanPricing.storagePerGB;
+
+  // Data transfer cost: $0.01/GiB for outbound (egress) traffic
+  // Inbound traffic is free, outbound has included allowance
+  const billableDataTransfer = Math.max(
+    0,
+    inputs.dataTransferGB - digitalOceanPricing.includedDataTransfer
+  );
+  const dataTransferCost =
+    billableDataTransfer * digitalOceanPricing.dataTransferPerGB;
+
+  const baseTotal = instanceCost + storageCost + dataTransferCost;
+  return {
+    instance: instanceCost,
+    storage: storageCost,
+    dataTransfer: dataTransferCost,
+    vercelStaticIP: vercelStaticIPCost.value.total,
+    total: baseTotal + vercelStaticIPCost.value.total,
+  };
+});
+
 const comparison = computed(() => {
   const auroraName =
     inputs.auroraType === "serverless"
@@ -310,6 +856,11 @@ const comparison = computed(() => {
       name: "PlanetScale",
       cost: planetscaleCost.value.total,
       breakdown: planetscaleCost.value,
+    },
+    {
+      name: "Digital Ocean PostgreSQL",
+      cost: digitalOceanCost.value.total,
+      breakdown: digitalOceanCost.value,
     },
   ];
 
@@ -408,6 +959,22 @@ const formatCurrency = (value: number) => {
                   </UFormField>
 
                   <UFormField
+                    label="Configuration"
+                    name="auroraProvisionedConfig"
+                  >
+                    <USelect
+                      v-model="inputs.auroraProvisionedConfig"
+                      :items="[
+                        { label: 'Aurora Standard', value: 'standard' },
+                        {
+                          label: 'Aurora I/O-Optimized',
+                          value: 'ioOptimized',
+                        },
+                      ]"
+                    />
+                  </UFormField>
+
+                  <UFormField
                     label="I/O Requests (millions/month)"
                     name="auroraIO"
                   >
@@ -417,6 +984,9 @@ const formatCurrency = (value: number) => {
                       :max="1000"
                       :step="0.1"
                     />
+                    <template #hint>
+                      I/O is included with I/O-Optimized configuration
+                    </template>
                   </UFormField>
                 </template>
 
@@ -560,6 +1130,42 @@ const formatCurrency = (value: number) => {
                 </UFormField>
               </div>
             </div>
+
+            <!-- Digital Ocean -->
+            <div>
+              <h3 class="text-sm font-medium mb-4 text-muted">
+                Digital Ocean PostgreSQL
+              </h3>
+              <div class="space-y-4">
+                <UFormField label="Instance Type" name="digitalOceanInstance">
+                  <USelect
+                    v-model="inputs.digitalOceanInstanceName"
+                    :items="
+                      digitalOceanPricing.instances.map((i) => ({
+                        label: `${i.ram} GiB RAM, ${i.vCPU} vCPU - $${i.pricePerMonth}/mo`,
+                        value: i.name,
+                      }))
+                    "
+                  />
+                  <template #hint>
+                    Select the instance configuration that matches your workload
+                  </template>
+                </UFormField>
+
+                <UFormField label="Additional Nodes" name="digitalOceanNodes">
+                  <UInputNumber
+                    v-model="inputs.digitalOceanAdditionalNodes"
+                    :min="0"
+                    :max="2"
+                    :step="1"
+                  />
+                  <template #hint>
+                    Add standby nodes for high availability (0-2 additional
+                    nodes)
+                  </template>
+                </UFormField>
+              </div>
+            </div>
           </div>
         </UCard>
 
@@ -653,17 +1259,31 @@ const formatCurrency = (value: number) => {
                           :key="instance.name"
                           class="p-3 border rounded-lg space-y-2"
                         >
-                          <div class="font-medium">{{ instance.name }}</div>
-                          <div class="grid grid-cols-3 gap-2">
+                          <div class="font-medium">
+                            {{ instance.name }} ({{ instance.vCPU }} vCPU,
+                            {{ instance.ram }}GB RAM)
+                          </div>
+                          <div class="grid grid-cols-2 gap-2">
                             <UFormField
-                              :label="`${instance.name} Price/Hour ($)`"
-                              :name="`aurora-instance-${idx}`"
+                              :label="`Standard Price/Hour ($)`"
+                              :name="`aurora-instance-standard-${idx}`"
                             >
                               <UInputNumber
-                                v-model="auroraPricing.instances[idx]!.pricePerHour"
+                                v-model="auroraPricing.instances[idx]!.pricePerHourStandard"
                                 :min="0"
                                 :max="100"
-                                :step="0.01"
+                                :step="0.001"
+                              />
+                            </UFormField>
+                            <UFormField
+                              :label="`I/O-Optimized Price/Hour ($)`"
+                              :name="`aurora-instance-io-${idx}`"
+                            >
+                              <UInputNumber
+                                v-model="auroraPricing.instances[idx]!.pricePerHourIOOptimized"
+                                :min="0"
+                                :max="100"
+                                :step="0.001"
                               />
                             </UFormField>
                           </div>
@@ -1107,6 +1727,104 @@ const formatCurrency = (value: number) => {
               </template>
             </UCollapsible>
 
+            <!-- Digital Ocean Pricing -->
+            <UCollapsible>
+              <template #default="{ open }">
+                <UButton
+                  color="neutral"
+                  variant="ghost"
+                  class="w-full justify-between rounded-lg p-3"
+                >
+                  <span class="font-medium"
+                    >Digital Ocean PostgreSQL Pricing</span
+                  >
+                  <UIcon
+                    :name="
+                      open ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'
+                    "
+                    class="w-4 h-4"
+                  />
+                </UButton>
+              </template>
+              <template #content>
+                <div class="space-y-4 pt-4">
+                  <div class="grid grid-cols-2 gap-4">
+                    <UFormField
+                      label="Storage per GiB ($)"
+                      name="digitalOceanStorage"
+                    >
+                      <UInputNumber
+                        v-model="digitalOceanPricing.storagePerGB"
+                        :min="0"
+                        :max="10"
+                        :step="0.001"
+                      />
+                    </UFormField>
+                    <UFormField
+                      label="Data Transfer per GiB ($)"
+                      name="digitalOceanDataTransfer"
+                    >
+                      <UInputNumber
+                        v-model="digitalOceanPricing.dataTransferPerGB"
+                        :min="0"
+                        :max="1"
+                        :step="0.001"
+                      />
+                    </UFormField>
+                    <UFormField
+                      label="Included Data Transfer (GiB)"
+                      name="digitalOceanIncludedDataTransfer"
+                    >
+                      <UInputNumber
+                        v-model="digitalOceanPricing.includedDataTransfer"
+                        :min="0"
+                        :max="10000"
+                        :step="1"
+                      />
+                    </UFormField>
+                  </div>
+                  <div>
+                    <h4 class="text-sm font-medium mb-2">Instance Pricing</h4>
+                    <div class="space-y-3">
+                      <div
+                        v-for="(instance, idx) in digitalOceanPricing.instances"
+                        :key="instance.name"
+                        class="p-3 border rounded-lg space-y-2"
+                      >
+                        <div class="font-medium">
+                          {{ instance.ram }} GiB RAM, {{ instance.vCPU }} vCPU
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                          <UFormField
+                            :label="`Price/Hour ($)`"
+                            :name="`digitalocean-instance-hourly-${idx}`"
+                          >
+                            <UInputNumber
+                              v-model="digitalOceanPricing.instances[idx]!.pricePerHour"
+                              :min="0"
+                              :max="10"
+                              :step="0.00001"
+                            />
+                          </UFormField>
+                          <UFormField
+                            :label="`Price/Month ($)`"
+                            :name="`digitalocean-instance-monthly-${idx}`"
+                          >
+                            <UInputNumber
+                              v-model="digitalOceanPricing.instances[idx]!.pricePerMonth"
+                              :min="0"
+                              :max="10000"
+                              :step="0.01"
+                            />
+                          </UFormField>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </UCollapsible>
+
             <!-- Vercel Static IP Pricing -->
             <UCollapsible>
               <template #default="{ open }">
@@ -1158,7 +1876,7 @@ const formatCurrency = (value: number) => {
       <!-- Results Panel -->
       <div class="lg:col-span-2">
         <!-- Detailed Breakdown -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <!-- AWS Aurora -->
           <UCard>
             <template #header>
@@ -1173,7 +1891,11 @@ const formatCurrency = (value: number) => {
                               ? "I/O-Optimized"
                               : "Standard"
                           })`
-                        : "Provisioned"
+                        : `Provisioned (${
+                            inputs.auroraProvisionedConfig === "ioOptimized"
+                              ? "I/O-Optimized"
+                              : "Standard"
+                          })`
                     }}
                   </p>
                 </div>
@@ -1339,6 +2061,55 @@ const formatCurrency = (value: number) => {
               </div>
             </div>
           </UCard>
+
+          <!-- Digital Ocean -->
+          <UCard>
+            <template #header>
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="font-semibold">Digital Ocean PostgreSQL</h3>
+                  <p class="text-xs text-muted mt-1">
+                    {{ digitalOceanInstance?.ram }} GiB RAM,
+                    {{ digitalOceanInstance?.vCPU }} vCPU
+                    {{
+                      inputs.digitalOceanAdditionalNodes > 0
+                        ? `+ ${inputs.digitalOceanAdditionalNodes} node(s)`
+                        : ""
+                    }}
+                  </p>
+                </div>
+                <UBadge color="primary" variant="subtle">
+                  {{ formatCurrency(digitalOceanCost.total) }}
+                </UBadge>
+              </div>
+            </template>
+
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between">
+                <span class="text-muted">Instance</span>
+                <span>{{ formatCurrency(digitalOceanCost.instance) }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-muted">Storage</span>
+                <span>{{ formatCurrency(digitalOceanCost.storage) }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-muted">Data Transfer</span>
+                <span>{{ formatCurrency(digitalOceanCost.dataTransfer) }}</span>
+              </div>
+              <div v-if="inputs.vercelStaticIP" class="flex justify-between">
+                <span class="text-muted">Vercel Static IP</span>
+                <span>{{
+                  formatCurrency(digitalOceanCost.vercelStaticIP)
+                }}</span>
+              </div>
+              <USeparator />
+              <div class="flex justify-between font-semibold">
+                <span>Total</span>
+                <span>{{ formatCurrency(digitalOceanCost.total) }}</span>
+              </div>
+            </div>
+          </UCard>
         </div>
 
         <!-- Pricing Notes -->
@@ -1368,6 +2139,15 @@ const formatCurrency = (value: number) => {
               $0.45/GB. First 100GB data transfer included, then $0.096/GB.
               Branching included in HA plans. All HA clusters include 3 nodes (1
               primary + 2 replicas) across 3 availability zones.
+            </div>
+            <div>
+              <strong>Digital Ocean PostgreSQL:</strong> Managed PostgreSQL
+              database with multiple instance sizes. Storage pricing: $0.215/GiB
+              per month. Inbound traffic is free; outbound (egress) traffic
+              costs $0.01/GiB with 1000 GiB included per month for Managed
+              Databases. Additional standby nodes available for high
+              availability (0-2 nodes). Pricing based on Basic Regular CPU
+              option.
             </div>
             <div v-if="inputs.vercelStaticIP">
               <strong>Vercel Static IP:</strong> $100/month per project plus
